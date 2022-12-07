@@ -1,8 +1,10 @@
 # jian adds
+
 Exercise.java
 .DS_Store
 .vscode
-lombok.jar
+*.jar
+*.war
 lib/
 
 .metadata/

@@ -8,6 +8,7 @@ Exercise.java
 *.class
 *.war
 lib/
+Build/
 
 .metadata/
 bin/

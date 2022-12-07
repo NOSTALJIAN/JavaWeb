@@ -1,8 +1,8 @@
 package ch05;
 
-
 import java.io.IOException;
-import javax.servlet.ServletConfig;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,20 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ThirdServlet
  */
-@WebServlet("/ch05/login")
+@WebServlet("/ch05/third")
 public class ThirdServlet extends HttpServlet {
-	public void init(ServletConfig config) throws ServletException {
-		System.out.println("init() method 호출");
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("<!DOCTYPE html>");
+		out.print("<html lang=\"en\">");
+		out.print("<head>");
+		out.print("	<meta charset=\"UTF-8\">");
+		out.print("	<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+		out.print("	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+		out.print("	<title>Document</title>");
+		out.print("</head>");
+		out.print("<body>");
+		out.print("	<h1>Hello World!!!</h1>");
+		out.print("	<h1>안녕하세요?</h1>");
+		out.print("	</body>");
+		out.print("</html>");
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String user_id = request.getParameter("user_id");
-		String user_pw = request.getParameter("user_pw");
-		System.out.println("아이디	: " + user_id);
-		System.out.println("비밀번호: " + user_pw);
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
-	public void destroy() {
-		System.out.println("destroy() method 호출");
-	}
+
 }

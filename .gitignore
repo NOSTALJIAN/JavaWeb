@@ -1,9 +1,11 @@
 # jian adds
 
+mysql.properties
 Exercise.java
 .DS_Store
 .vscode
 *.jar
+*.class
 *.war
 lib/
 

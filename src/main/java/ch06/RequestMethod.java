@@ -42,7 +42,15 @@ public class RequestMethod extends HttpServlet {
 		out.print("</head>");
 		out.print("<body>");
 		out.print("	<h1>HttpServletRequest</h1>");
-		out.print("<hr>");
+		out.print(" <hr>");
+		
+		//	out.print(data);
+		String[] ulList = data.split("\n");
+		out.print(" <ul>");
+		for (String li: ulList)
+			out.print("  <li>" + li + "</li>");
+		out.print(" </ul>");
+		
 		out.print("	</body>");
 		out.print("</html>");
 	}

@@ -15,12 +15,12 @@ public class RequestMethod extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		String contextPath = request.getContextPath();
-		String method = request.getMethod();
-		String reqestUri = request.getRequestURI();
-		String serverName = request.getServerName();
-		String servletPath = request.getServletPath();
-		String pathInfo = request.getPathInfo();
+		String contextPath = request.getContextPath();		// /jw
+		String method = request.getMethod();				// GET
+		String reqestUri = request.getRequestURI();			// /jw/ch06/reqMethod
+		String serverName = request.getServerName();		// localhost
+		String servletPath = request.getServletPath();		// /ch06/reqMethod
+		String pathInfo = request.getPathInfo();			// null
 		
 		String data = "contextPath : " + contextPath + "\n";
 		data += "method : " + method + "\n";

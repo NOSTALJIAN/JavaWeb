@@ -1,4 +1,4 @@
-package ch07;
+package task;
 
 import java.sql.*;
 import java.util.*;

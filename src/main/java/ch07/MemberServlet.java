@@ -26,5 +26,7 @@ public class MemberServlet extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		System.out.println("doHandle() Method 호출");
+		
 	}
 }

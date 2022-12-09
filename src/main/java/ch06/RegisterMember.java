@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ch07.Member;
-import ch07.MemberDAO;
 
 @WebServlet("/ch06/regMember")
 public class RegisterMember extends HttpServlet {

@@ -4,65 +4,38 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import java.lang.String;
 
 public class MemberDAO {
-	private String host;
-	private String user;
-	private String password;
-	private String database;
-	private String port;
+	private Connection con;
+	private PreparedStatement pstmt;
+	private DataSource dataFactory;
 	
-	// Constructor
 	MemberDAO() {
 		try {
-			// properties 정보 가져오기
-			InputStream is = new FileInputStream("/Users/NOSTALJIAN/Workspace/JavaWeb/src/main/java/ch06/mysql.properties");
-			Properties props = new Properties();
-			props.load(is);
-			is.close();
-			
-			host = props.getProperty("host");
-			user = props.getProperty("user");
-			password = props.getProperty("password");
-			database = props.getProperty("database");
-			port = props.getProperty("port", "3306");
+			// JNDI 기본 경로 지정
+			Context ctx = new InitialContext();
+			Context envCtx = (Context) ctx.lookup("java:/comp/env");
+			dataFactory = (DataSource) envCtx.lookup("jdbc/jian");		// context.xml name값
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	// 연결하기
-	public Connection myGetConnection() {
-		Connection conn = null;
-		try {
-			// JDBC Driver 등록
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("-------------------------------------------------");
-			System.out.println("MySQL 드라이버 로딩 성공");
-			
-			// 연결하기
-			String connStr = "jdbc:mysql://" + host + ":" + port + "/" + database;
-			conn = DriverManager.getConnection(
-					connStr,
-					user,
-					password
-					);
-			System.out.println("Connection 생성 성공");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return conn;
 	}
 	
 	public List<Member> listMembers() {
 		List<Member> list = new ArrayList<Member>();
-		Connection conn = myGetConnection();
 		try {
-			String sql = "" +
-					"SELECT uid, pwd, uname, birth, email, gender, hobby " + 
-					"FROM member;";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			// connDB();
+			con = dataFactory.getConnection();
+			String sql = "SELECT * FROM member ";
+			System.out.println("-------------------------------------------------");
+			System.out.println("prepareStatement: " + sql);
+			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Member mem = new Member();
@@ -73,7 +46,6 @@ public class MemberDAO {
 				mem.setEmail(rs.getString("email"));
 				mem.setGender(rs.getString("gender"));
 				mem.setHobby(rs.getString("hobby"));
-				System.out.println("-------------------------------------------------");
 				System.out.println("ID : " + mem.getUid());
 				System.out.println("PWD : " + mem.getPwd());
 				System.out.println("name : " + mem.getUname());
@@ -85,7 +57,7 @@ public class MemberDAO {
 			}
 			rs.close();
 			pstmt.close();
-			conn.close();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

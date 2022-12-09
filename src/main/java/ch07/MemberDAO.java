@@ -1,7 +1,5 @@
 package ch07;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
@@ -22,6 +20,8 @@ public class MemberDAO {
 			Context ctx = new InitialContext();
 			Context envCtx = (Context) ctx.lookup("java:/comp/env");
 			dataFactory = (DataSource) envCtx.lookup("jdbc/jian");		// context.xml name값
+			System.out.println("-------------------------------------------------");
+			System.out.println("DB 연결 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class MemberDAO {
 			con = dataFactory.getConnection();
 			String sql = "SELECT * FROM member ";
 			System.out.println("-------------------------------------------------");
-			System.out.println("prepareStatement: " + sql);
+			System.out.println("MemberList: \n" + sql);
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -64,50 +64,55 @@ public class MemberDAO {
 		return list;
 	}
 	
-	// Member 등록
+	// 회원 정보 등록
 	public void addMember(Member mem) {
-		Connection conn = myGetConnection();
-
-		
-		String uid = mem.getUid();
-		String pwd = mem.getPwd();
-		String uname = mem.getUname();
-		java.sql.Date birth = (java.sql.Date) mem.getBirth();
-		String email = mem.getEmail();
-		String gender = mem.getGender();
-		String hobby = mem.getHobby();
-		
-		String sql = "INSERT INTO member "
-				+ "(uid,pwd,uname,birth,email,gender,hobby) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, uid);
-			pstmt.setString(2, pwd);
-			pstmt.setString(3, uname);
-			pstmt.setDate(4, birth);
-			pstmt.setString(5, email);
-			pstmt.setString(6, gender);
-			pstmt.setString(7, hobby);
+			// DataSource 인용해서 DB 연결
+			con = dataFactory.getConnection();
+			
+			// MySQL INSERT문 => 문자열
+			String sql = "INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, ?);";
+			System.out.println("-------------------------------------------------");
+			System.out.println("prepareStatement: \n" + sql);
+			// INSERT문의 '?'에 순서대로 회원 정보를 세팅
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mem.getUid());
+			pstmt.setString(2, mem.getPwd());
+			pstmt.setString(3, mem.getUname());
+			pstmt.setDate(4, mem.getBirth());
+			pstmt.setString(5, mem.getEmail());
+			pstmt.setString(6, mem.getGender());
+			pstmt.setString(7, mem.getHobby());
+			System.out.println("ID : " + mem.getUid());
+			System.out.println("PWD : " + mem.getPwd());
+			System.out.println("name : " + mem.getUname());
+			System.out.println("birthDay : " + mem.getBirth());
+			System.out.println("E-MAIL : " + mem.getEmail());
+			System.out.println("gender : " + mem.getGender());
+			System.out.println("hobby : " + mem.getHobby());
+			// 회원 정보를 테이블에 추가
 			pstmt.executeUpdate();
 			pstmt.close();
-			conn.close();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
-	// Member 탈퇴
+	// 회원 정보 삭제
 	public void delMember(String uid) {
-		Connection conn = myGetConnection();			//	위에 만들어 둔 myGetConnection 메소드 실행
-		String sql = "" +
-				"DELETE FROM member " +
-				"WHERE uid=?;";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, uid);
+			con = dataFactory.getConnection();
 			
-			// Delete
+			// DELETE문을 문자열로 만들기
+			String sql = "DELETE FROM member " + "WHERE uid=?";
+			System.out.println("-------------------------------------------------");
+			System.out.println("DeleteMember: \n" + sql + "\nuid = " + uid);
+			pstmt = con.prepareStatement(sql);
+			// '?'에 ID 입력
+			pstmt.setString(1, uid);
+			// DELETE문 실행
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {

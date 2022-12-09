@@ -37,17 +37,23 @@
       let gender = formReg.gender.value;
       let hobby = formReg.hobby.value;
       console.log(uid, pwd, pwd2, uname, birth, email, gender, hobby);
-      if (uid.length <= 4 || uid == "") {
+      if (uid.length < 4 || uid == "") {
         alert("아이디 입력은 필수입니다. 4자 이상 입력하세요.");
       } else if (pwd.length < 4 || pwd == "") {
         alert("비밀번호 입력은 필수입니다. 4자 이상 입력하세요.");
-      } else if (uname.length == 0 || uname == "") {
-        alert("이름 입력은 필수입니다.");
       } else if (pwd != pwd2) {
         alert("입력한 패스워드가 일치하지 않습니다.");
+      } else if (uname.length == 0 || uname == "") {
+        alert("이름 입력은 필수입니다.");
+      } else if (birth.length == 0 || birth == "") {
+        alert("생년월일 입력은 필수입니다.");
+      } else if (email.length == 0 || email == "") {
+        alert("이메일 입력은 필수입니다.");
+      } else if (gender.length == 0 || gender == "") {
+        alert("성별 선택은 필수입니다.");
       } else {
         formReg.method = 'post';
-        formReg.action = '/jw/ch06/regMember';
+        formReg.action = '/jw/ch07/member';
         formReg.submit();
       }
     }
@@ -193,7 +199,7 @@
     }
 
     .ui-widget-header .ui-icon {
-      background-image: url('/src/main/webapp/ch06/btns.png');
+      background-image: url('/src/main/webapp/ch07/btns.png');
     }
 
     .ui-icon-circle-triangle-e {
@@ -249,88 +255,91 @@
 <body style="margin: 40px;">
   <h1>회원 가입</h1>
   <hr><br>
-  <form name="formReg">
-    <table>
-      <tr>
-        <td style="text-align: center;">ID</td>
-        <td> : <input type="text" name="uid" placeholder="가입할 사용자 ID"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">PW</td>
-        <td> : <input type="password" name="pwd" placeholder="사용할 비밀번호"></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>&nbsp; <input type="password" name="pwd2" placeholder="비밀번호 확인"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">이름</td>
-        <td> : <input type="text" name="uname" placeholder="사용자 이름"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">생년월일</td>
-        <td> : <input type="text" name="birth" id="datepicker" placeholder="ex) 2022-12-09"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">E-MAIL</td>
-        <td> : <input type="text" name="email" placeholder="ex) user@gmail.com"></td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">성별</td>
-        <td> :&nbsp;
-          <input type="radio" name="gender" value="male"> 남자
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td> &nbsp;&nbsp;
-          <input type="radio" name="gender" value="female"> 여자
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">취미</td>
-        <td> :&nbsp;
-          <input type="checkbox" name="hobby" value="Listening to music"> 음악 감상
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>&nbsp;&nbsp;
-          <input type="checkbox" name="hobby" value="Watching movies"> 영화보기
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>&nbsp;&nbsp;
-          <input type="checkbox" name="hobby" value="Exercise"> 운동하기
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>&nbsp;&nbsp;
-          <input type="checkbox" name="hobby" value="Drawing"> 그림 그리기
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>&nbsp;&nbsp;
-          <input type="checkbox" name="hobby" value="Take a picture"> 사진 촬영
-        </td>
-      </tr>
-      <tr>
-        <td><br></td>
-      </tr>
-      <tr style="text-align: center;">
-        <td colspan="2">
-          <button class="btn btn-danger" onclick="vaildate()">가입하기</button>
-          <button class="btn btn-secondary" type="reset">다시 입력</button>
-          <input type="hidden" name="command" value="addMember" />
-        </td>
-      </tr>
-    </table>
-  </form>
   <div class="container-fluid">
-    <a style="text-align:end;" href="/jw/ch06/regMember?command=delMember&uid="></a>
+    <form name="formReg">
+      <table>
+        <th style="text-align: center;" colspan="2">회원 가입</th>
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ID</td>
+          <td> : <input type="text" name="uid" placeholder="가입할 사용자 ID"></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">PW</td>
+          <td> : <input type="password" name="pwd" placeholder="사용할 비밀번호"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp; <input type="password" name="pwd2" placeholder="비밀번호 확인"></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">이름</td>
+          <td> : <input type="text" name="uname" placeholder="사용자 이름"></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">생년월일</td>
+          <td> : <input type="text" name="birth" id="datepicker" placeholder="ex) 2022-12-09"></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">E-MAIL</td>
+          <td> : <input type="text" name="email" placeholder="ex) user@gmail.com"></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">성별</td>
+          <td> :&nbsp;
+            <input type="radio" name="gender" value="male"> 남자
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td> &nbsp;&nbsp;
+            <input type="radio" name="gender" value="female" checked> 여자
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">취미</td>
+          <td> :&nbsp;
+            <input type="checkbox" name="hobby" value="Listening to music" checked> 음악 감상
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp;&nbsp;
+            <input type="checkbox" name="hobby" value="Watching movies" checked> 영화보기
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp;&nbsp;
+            <input type="checkbox" name="hobby" value="Exercise"> 운동하기
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp;&nbsp;
+            <input type="checkbox" name="hobby" value="Drawing"> 그림 그리기
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp;&nbsp;
+            <input type="checkbox" name="hobby" value="Take a picture"> 사진 촬영
+          </td>
+        </tr>
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr style="text-align: center;">
+          <td colspan="2">
+            <button class="btn btn-danger" onclick="vaildate()">가입하기</button>
+            <input type="hidden" name="comm" value="add" />
+            <button class="btn btn-secondary" type="reset">다시 입력</button>
+          </td>
+        </tr>
+      </table>
+    </form>
   </div>
 </body>
 

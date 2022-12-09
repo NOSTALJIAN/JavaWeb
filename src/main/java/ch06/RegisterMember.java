@@ -195,6 +195,7 @@ public class RegisterMember extends HttpServlet {
 
 	private void doHandle(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException, ParseException {
+		/*
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -320,6 +321,6 @@ public class RegisterMember extends HttpServlet {
 			out.print(" </div>");
 			out.print("	</body>");
 			out.print("</html>");
+			*/
 	}
-
 }

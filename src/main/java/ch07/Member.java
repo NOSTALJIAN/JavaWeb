@@ -1,6 +1,6 @@
 package ch07;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 import java.lang.String;
 
@@ -8,7 +8,6 @@ public class Member {
 	// uid, pwd, 이름, 생년월일, email, 성별, 취미
 	private String uid;
 	private String pwd;
-	private String pwd2;
 	private String uname;
 	private Date birth;
 	private String email;
@@ -75,14 +74,6 @@ public class Member {
 		this.pwd = pwd;
 	}
 	
-	public String getPwd2() {
-		return pwd2;
-	}
-	
-	public void setPwd2(String pwd2) {
-		this.pwd2 = pwd2;
-	}
-
 	public String getUname() {
 		return uname;
 	}

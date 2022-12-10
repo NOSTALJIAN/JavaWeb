@@ -31,7 +31,7 @@ public class Member {
 	@Override
 	// toString() Method
 	public String toString() {
-		return "Member [uid=" + uid + ", pwd=" + pwd + ", uname=" + uname + ", birth=" + birth + ", email=" + email
+		return "MemberVO [uid=" + uid + ", pwd=" + pwd + ", uname=" + uname + ", birth=" + birth + ", email=" + email
 				+ ", gender=" + gender + ", hobby=" + hobby + "]";
 	}
 

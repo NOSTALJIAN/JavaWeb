@@ -1,6 +1,8 @@
 package task;
 
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.naming.Context;
@@ -27,19 +29,20 @@ public class MemberDAO {
 		}
 	}
 	
-	public List<Member> listMembers() {
-		List<Member> list = new ArrayList<Member>();
+	public List<MemberVO> listMembers() {
+		List<MemberVO> membersList = new ArrayList<MemberVO>();
 		try {
 			// connDB();
 			con = dataFactory.getConnection();
-			String sql = "SELECT * FROM member ";
+			String sql = "SELECT * FROM member ORDER BY joinDate DESC";
 			System.out.println("-------------------------------------------------");
 			System.out.println("MemberList: \n" + sql);
 			System.out.println();
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Member mem = new Member();
+				MemberVO mem = new MemberVO();
+
 				mem.setUid(rs.getString("uid"));
 				mem.setPwd(rs.getString("pwd"));
 				mem.setUname(rs.getString("uname"));
@@ -47,6 +50,9 @@ public class MemberDAO {
 				mem.setEmail(rs.getString("email"));
 				mem.setGender(rs.getString("gender"));
 				mem.setHobby(rs.getString("hobby"));
+				// MySQL에서 DATE 타입인 joinDate를 가져와서 LocalDate 타입으로 변환
+				mem.setJoinDate(rs.getDate("joinDate").toLocalDate());
+
 				System.out.println("ID : " + mem.getUid());
 				System.out.println("PWD : " + mem.getPwd());
 				System.out.println("name : " + mem.getUname());
@@ -54,8 +60,9 @@ public class MemberDAO {
 				System.out.println("E-MAIL : " + mem.getEmail());
 				System.out.println("gender : " + mem.getGender());
 				System.out.println("hobby : " + mem.getHobby());
+				System.out.println("joinDate : " + mem.getJoinDate());
 				System.out.println();
-				list.add(mem);
+				membersList.add(mem);
 			}
 			rs.close();
 			pstmt.close();
@@ -63,17 +70,17 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return membersList;
 	}
 	
 	// 회원 정보 등록
-	public void addMember(Member mem) {
+	public void addMember(MemberVO mem) {
 		try {
 			// DataSource 인용해서 DB 연결
 			con = dataFactory.getConnection();
-			
+						
 			// MySQL INSERT문 => 문자열
-			String sql = "INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_DATE);";
 			System.out.println("-------------------------------------------------");
 			System.out.println("prepareStatement: \n" + sql);
 			System.out.println();
@@ -86,6 +93,7 @@ public class MemberDAO {
 			pstmt.setString(5, mem.getEmail());
 			pstmt.setString(6, mem.getGender());
 			pstmt.setString(7, mem.getHobby());
+
 			System.out.println("ID : " + mem.getUid());
 			System.out.println("PWD : " + mem.getPwd());
 			System.out.println("name : " + mem.getUname());
@@ -102,6 +110,38 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	// 회원 정보 조회
+	public MemberVO findMember(String _uid) {
+		MemberVO memInfo = null;
+		try {
+			con = dataFactory.getConnection();
+			String sql = "SELECT * FROM member WHERE uid=?";
+			System.out.println("-------------------------------------------------");
+			System.out.println("findMember: \n" + sql + "\nuid = " + _uid);
+			System.out.println();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, _uid);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			String uid = rs.getString("uid");
+			String pwd = rs.getString("pwd");
+			String uname = rs.getString("uname");
+			Date birth = rs.getDate("birth");
+			String email = rs.getString("email");
+			String gender = rs.getString("gender");
+			String hobby = rs.getString("hobby");
+			LocalDate joinDate = Date.valueOf(rs.getString("joinDate")).toLocalDate();
+			pstmt.close();
+			con.close();
+			memInfo = new MemberVO(uid, pwd, uname, birth, email, gender, hobby, joinDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memInfo;
+	}
+	
+	// 회원 정보 수정
 	
 	// 회원 정보 삭제
 	public void delMember(String uid) {

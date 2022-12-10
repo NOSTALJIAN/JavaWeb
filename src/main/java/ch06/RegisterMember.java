@@ -34,7 +34,7 @@ public class RegisterMember extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		MemberDAO dao = new MemberDAO();
-		List<Member> list = dao.listMembers();
+		List<MemberVO> list = dao.listMembers();
 		
 		out.print("<!DOCTYPE html>");
 		out.print("<html lang=\"ko\">");
@@ -80,7 +80,7 @@ public class RegisterMember extends HttpServlet {
 		out.print("    </tr>");
 		
 		for (int i = 0; i < list.size(); i++) {
-			Member m = list.get(i);
+			MemberVO m = list.get(i);
 			String uid = m.getUid();
 			String pwd = m.getPwd();
 			String uname = m.getUname();
@@ -218,7 +218,7 @@ public class RegisterMember extends HttpServlet {
 			String[] hobbies = request.getParameterValues("hobby");
 			if (hobbies != null) {
 				String hobby = String.join(",", hobbies);
-			Member m = (Member) new Member();
+			MemberVO m = (MemberVO) new MemberVO();
 			m.setUid(id);
 			m.setPwd(pwd);
 			m.setUname(name);
@@ -235,7 +235,7 @@ public class RegisterMember extends HttpServlet {
 		}
 			
 		
-		List<Member> list = dao.listMembers();
+		List<MemberVO> list = dao.listMembers();
 
 		out.print("<!DOCTYPE html>");
 		out.print("<html lang=\"ko\">");
@@ -283,7 +283,7 @@ public class RegisterMember extends HttpServlet {
 		
 		
 		for (int i = 0; i < list.size(); i++) {
-			Member m = (Member) list.get(i);
+			MemberVO m = (MemberVO) list.get(i);
 			String _uid = m.getUid();
 			String _pwd = m.getPwd();
 			String _uname = m.getUname();

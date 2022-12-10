@@ -1,0 +1,71 @@
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+table * {
+  position: relative;
+  text-align: center;
+}
+table td,
+table th {
+  padding-left: 8px;
+}
+table thead tr,
+table thead td {
+  height: 60px;
+  background: #ffed86;
+  font-size: 18px;
+  font-family: 'GmarketSansMedium';
+}
+table tbody tr {
+  height: 48px;
+  font-size: 14px;
+  font-family: 'S-CoreDream-3Light';
+}
+table tbody tr:last-child {
+  border: 0;
+}
+table td,
+table th {
+  text-align: left;
+}
+table td.l,
+table th.l {
+  text-align: right;
+}
+table td.c,
+table th.c {
+  text-align: center;
+}
+table td.r,
+table th.r {
+  text-align: center;
+}
+
+body {
+  background: #9bc86a;
+  padding: 20px;
+}
+
+blockquote {
+  color: white;
+  text-align: center;
+}
+
+.l {
+  height: 48px;
+  width: 100px;
+  background: #ffed86;
+  font-size: 18px;
+  font-family: 'GmarketSansMedium';
+}
+.r {
+  border-bottom: 1px solid #e3f1d5;
+  border-left: 1px solid #e3f1d5;
+}

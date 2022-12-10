@@ -74,6 +74,7 @@ public class MemberController extends HttpServlet {
 			MemberVO mem = new MemberVO(uid, pwd, uname, birth, email, gender, hobby);
 			memberDAO.addMember(mem);
 			// 회원 등록 후 다시 회원 목록 출력
+			request.setAttribute("msg", "addMember");
 			nextPage = "/task/member/listMembers.do";
 			
 		// 회원 가입창
@@ -112,7 +113,7 @@ public class MemberController extends HttpServlet {
 		} else if (action.equals("/delMember.do")) {
 			String uid = request.getParameter("uid");
 			memberDAO.delMember(uid);
-			request.setAttribute("msg", "deleted");
+			request.setAttribute("msg", "delMember");
 			nextPage = "/task/member/listMembers.do";
 
 		// 그 외 다른 action 값은 회원 목록을 출력

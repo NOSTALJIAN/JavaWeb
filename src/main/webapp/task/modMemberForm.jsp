@@ -13,7 +13,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -80,286 +79,90 @@
       });
     });
   </script>
-  <style>
-    .ui-widget-header {
-      border: 0px solid #dddddd;
-      background: #fff;
-    }
-
-    .ui-datepicker-calendar>thead>tr>th {
-      font-size: 14px !important;
-    }
-
-    .ui-datepicker .ui-datepicker-header {
-      position: relative;
-      padding: 10px 0;
-    }
-
-    .ui-state-default,
-    .ui-widget-content .ui-state-default,
-    .ui-widget-header .ui-state-default,
-    .ui-button,
-    html .ui-button.ui-state-disabled:hover,
-    html .ui-button.ui-state-disabled:active {
-      border: 0px solid #c5c5c5;
-      background-color: transparent;
-      font-weight: normal;
-      color: #454545;
-      text-align: center;
-    }
-
-    .ui-datepicker .ui-datepicker-title {
-      margin: 0 0em;
-      line-height: 16px;
-      text-align: center;
-      font-size: 14px;
-      padding: 0px;
-      font-weight: bold;
-    }
-
-    .ui-datepicker {
-      display: none;
-      background-color: #fff;
-      border-radius: 4px;
-      margin-top: 10px;
-      margin-left: 0px;
-      margin-right: 0px;
-      padding: 20px;
-      padding-bottom: 10px;
-      width: 300px;
-      box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .ui-widget.ui-widget-content {
-      border: 1px solid #eee;
-    }
-
-    #datepicker:focus>.ui-datepicker {
-      display: block;
-    }
-
-    .ui-datepicker-prev,
-    .ui-datepicker-next {
-      cursor: pointer;
-    }
-
-    .ui-datepicker-next {
-      float: right;
-    }
-
-    .ui-state-disabled {
-      cursor: auto;
-      color: hsla(0, 0%, 80%, 1);
-    }
-
-    .ui-datepicker-title {
-      text-align: center;
-      padding: 10px;
-      font-weight: 100;
-      font-size: 20px;
-    }
-
-    .ui-datepicker-calendar {
-      width: 100%;
-    }
-
-    .ui-datepicker-calendar>thead>tr>th {
-      padding: 5px;
-      font-size: 20px;
-      font-weight: 400;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>td>a {
-      color: #000;
-      font-size: 12px !important;
-      font-weight: bold !important;
-      text-decoration: none;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
-      cursor: auto;
-      background-color: #fff;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>td {
-      border-radius: 100%;
-      width: 44px;
-      height: 30px;
-      cursor: pointer;
-      padding: 5px;
-      font-weight: 100;
-      text-align: center;
-      font-size: 12px;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>td:hover {
-      background-color: transparent;
-      opacity: 0.6;
-    }
-
-    .ui-state-hover,
-    .ui-widget-content .ui-state-hover,
-    .ui-widget-header .ui-state-hover,
-    .ui-state-focus,
-    .ui-widget-content .ui-state-focus,
-    .ui-widget-header .ui-state-focus,
-    .ui-button:hover,
-    .ui-button:focus {
-      border: 0px solid #cccccc;
-      background-color: transparent;
-      font-weight: normal;
-      color: #2b2b2b;
-    }
-
-    .ui-widget-header .ui-icon {
-      background-image: url('https://github.com/NOSTALJIAN/JavaWeb/blob/master/src/main/webapp/ch07/btns.png?raw=true');
-    }
-
-    .ui-icon-circle-triangle-e {
-      background-position: -20px 0px;
-      background-size: 36px;
-    }
-
-    .ui-icon-circle-triangle-w {
-      background-position: -0px -0px;
-      background-size: 36px;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>td:first-child a {
-      color: red !important;
-    }
-
-    .ui-datepicker-calendar>tbody>tr>td:last-child a {
-      color: #0099ff !important;
-    }
-
-    .ui-datepicker-calendar>thead>tr>th:first-child {
-      color: red !important;
-    }
-
-    .ui-datepicker-calendar>thead>tr>th:last-child {
-      color: #0099ff !important;
-    }
-
-    .ui-state-highlight,
-    .ui-widget-content .ui-state-highlight,
-    .ui-widget-header .ui-state-highlight {
-      border: 0px;
-      background: #f1f1f1;
-      border-radius: 50%;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    .inp {
-      padding: 10px 10px;
-      background-color: #f1f1f1;
-      border-radius: 4px;
-      border: 0px;
-    }
-
-    .inp:focus {
-      outline: none;
-      background-color: #eee;
-    }
-
-    .cls1 {
-      font-size: 40px;
-      text-align: center;
-    }
-
-    .cls2 {
-      font-size: 20px;
-      text-align: center;
-    }
-  </style>
+  <link href="/jw/task/calc.css" rel="stylesheet">
+  <link href="/jw/task/table.css" rel="stylesheet">
+  <link href="/jw/task/font.css" rel="stylesheet">
 </head>
 
-<body style="margin: 40px;">
-  <h1 class="cls1">회원 정보 수정</h1>
-  <hr><br>
-  <div class="container-fluid" align="center">
+<body>
+  <div>
+    <h1 class="mt-3 a" style="text-align: center; color: white; font-size: 50px;">MODIFYING<br>INFORMATION</h1>
+  </div>
+  <div class="container-fluid mt-4" style="max-width: 500px;">
     <form name="formReg">
       <table>
-        <th style="text-align: center;" colspan="2">회원 정보 수정</th>
         <tr>
-          <td><br></td>
+          <td class="l" style="text-align: center;">ID</td>
+          <td class="r"><input type="text" name="uid" value="${memInfo.uid}" disabled></td>
         </tr>
         <tr>
-          <td style="text-align: center;">ID</td>
-          <td>&nbsp; : <input type="text" name="uid" value="${memInfo.uid}" disabled></td>
+          <td class="l" style="text-align: center;">PW</td>
+          <td class="r"><input type="password" name="pwd" value="${memInfo.pwd}"></td>
         </tr>
         <tr>
-          <td style="text-align: center;">PW</td>
-          <td>&nbsp; : <input type="password" name="pwd" value="${memInfo.pwd}"></td>
+          <td class="l"></td>
+          <td class="r"><input type="password" name="pwd2" placeholder="비밀번호 확인" value="${memInfo.pwd}"></td>
         </tr>
         <tr>
-          <td></td>
-          <td>&nbsp; &nbsp; <input type="password" name="pwd2" placeholder="비밀번호 확인" value="${memInfo.pwd}"></td>
+          <td class="l" style="text-align: center;">이름</td>
+          <td class="r"><input type="text" name="uname" value="${memInfo.uname}" disabled></td>
         </tr>
         <tr>
-          <td style="text-align: center;">이름</td>
-          <td>&nbsp; : <input type="text" name="uname" value="${memInfo.uname}" disabled></td>
+          <td class="l" style="text-align: center;">생년월일</td>
+          <td class="r"><input type="text" name="birth" id="datepicker" value="${memInfo.birth}"></td>
         </tr>
         <tr>
-          <td style="text-align: center;">생년월일</td>
-          <td>&nbsp; : <input type="text" name="birth" id="datepicker" value="${memInfo.birth}"></td>
+          <td class="l" style="text-align: center;">E-MAIL</td>
+          <td class="r"><input type="text" name="email" value="${memInfo.email}"></td>
         </tr>
         <tr>
-          <td style="text-align: center;">E-MAIL</td>
-          <td>&nbsp; : <input type="text" name="email" value="${memInfo.email}"></td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">성별</td>
-          <td>&nbsp; : &nbsp;${memInfo.gender}<input type="hidden" name="gender" value="${memInfo.gender}"></td>
+          <td class="l" style="text-align: center;">성별</td>
+          <td class="r" style="text-align: center;">${memInfo.gender}<input type="hidden" name="gender"
+              value="${memInfo.gender}">
+          </td>
         </tr>
         <div class="hobby">
           <tr>
-            <td style="text-align: center;">취미</td>
-            <td>&nbsp; :&nbsp;
+            <td class="l" style="text-align: center;">취미</td>
+            <td class="r" style="text-align: center;">
               <input type="checkbox" name="hobby" value="Listening to music"> 음악 감상
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td>&nbsp; &nbsp;&nbsp;
+            <td class="l"></td>
+            <td class="r" style="text-align: center;">
               <input type="checkbox" name="hobby" value="Watching movies">
               영화보기
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td>&nbsp; &nbsp;&nbsp;
+            <td class="l"></td>
+            <td class="r" style="text-align: center;">
               <input type="checkbox" name="hobby" value="Exercise"> 운동하기
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td>&nbsp; &nbsp;&nbsp;
+            <td class="l"></td>
+            <td class="r" style="text-align: center;">
               <input type="checkbox" name="hobby" value="Drawing"> 그림 그리기
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td>&nbsp; &nbsp;&nbsp;
+            <td class="l"></td>
+            <td class="r" style="text-align: center;">
               <input type="checkbox" name="hobby" value="Take a picture"> 사진 촬영
             </td>
           </tr>
         </div>
         <tr>
-          <td style="text-align: center;">가입일</td>
-          <td>&nbsp; : &nbsp;${memInfo.joinDate}</td>
-        </tr>
-        <tr>
-          <td><br></td>
-        </tr>
-        <tr style="text-align: center;">
-          <td colspan="2">
-            <button class="btn btn-danger" onclick="vaildate()">수정하기</button>
-            <button class="btn btn-secondary" type="reset">다시 입력</button>
-          </td>
+          <td class="l" style="text-align: center;">가입일</td>
+          <td style="text-align: center;">${memInfo.joinDate}</td>
         </tr>
       </table>
+      <div class="container-fluid mt-4 b" align="center">
+        <button class="btn btn-danger" onclick="vaildate()">수정하기</button>
+        <button class="btn btn-secondary" type="reset">다시입력</button>
+      </div>
     </form>
   </div>
 </body>

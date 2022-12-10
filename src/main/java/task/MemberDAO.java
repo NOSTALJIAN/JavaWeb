@@ -142,6 +142,33 @@ public class MemberDAO {
 	}
 	
 	// 회원 정보 수정
+	public void modMember(MemberVO memberVO) {
+		String uid = memberVO.getUid();
+		String pwd = memberVO.getPwd();
+		String uname = memberVO.getUname();
+		Date birth = memberVO.getBirth();
+		String email = memberVO.getEmail();
+		String hobby = memberVO.getHobby();
+		try {
+			con = dataFactory.getConnection();
+			String sql = "UPDATE member SET pwd=?,uname=?,birth=?,email=?,hobby=? "
+						+ "WHERE uid=?";
+			System.out.println("-------------------------------------------------");
+			System.out.println("modMember: \n" + sql + "\nuid = " + uid);
+			System.out.println();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, uname);
+			pstmt.setDate(3, birth);
+			pstmt.setString(4, email);
+			pstmt.setString(5, hobby);
+			pstmt.executeQuery();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// 회원 정보 삭제
 	public void delMember(String uid) {

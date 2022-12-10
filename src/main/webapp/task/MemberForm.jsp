@@ -56,6 +56,8 @@
         alert("아이디 입력은 필수입니다. 4자 이상 입력하세요.");
       } else if (pwd.length < 4 || pwd == "") {
         alert("비밀번호 입력은 필수입니다. 4자 이상 입력하세요.");
+      } else if (pwd2 == "") {
+        alert("비밀번호 확인은 필수입니다.");
       } else if (pwd != pwd2) {
         alert("입력한 패스워드가 일치하지 않습니다.");
       } else if (uname.length == 0 || uname == "") {
@@ -67,8 +69,8 @@
       } else if (gender.length == 0 || gender == "") {
         alert("성별 선택은 필수입니다.");
       } else {
-        formReg.method = 'post';
-        formReg.action = '/jw/ch07/member';
+        formReg.method = "post";
+    	formReg.action = "${contextPath}/task/member/addMember.do";
         formReg.submit();
       }
     }
@@ -281,7 +283,7 @@
   <h1 class="cls1">회원 가입</h1>
   <hr><br>
   <div class="container-fluid" align="center">
-    <form method="post" action="${contextPath}/task/member/addMember.do">
+    <form name="formReg">
       <table>
         <th style="text-align: center;" colspan="2">회원 가입</th>
         <tr>
@@ -361,7 +363,7 @@
         </tr>
         <tr style="text-align: center;">
           <td colspan="2">
-            <button class="btn btn-danger" onclick="submit">가입하기</button>
+            <button class="btn btn-danger" onclick="vaildate()">가입하기</button>
             <button class="btn btn-secondary" type="reset">다시 입력</button>
           </td>
         </tr>

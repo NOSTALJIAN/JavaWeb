@@ -55,6 +55,7 @@ public class MemberController extends HttpServlet {
 		request.setAttribute("membersList", membersList);
 		// listMember.jsp로 포워딩
 		nextPage = "/task/listMembers.jsp";
+		
 		// action 값이 /addMember.do면 전송된 회원 정보를 가져와서 테이블에 추가
 		} else if (action.equals("/addMember.do")) {
 			String uid = request.getParameter("uid");
@@ -74,10 +75,46 @@ public class MemberController extends HttpServlet {
 			memberDAO.addMember(mem);
 			// 회원 등록 후 다시 회원 목록 출력
 			nextPage = "/task/member/listMembers.do";
-		// action 값이 /memberForm.do면 회원 가입창을 화면에 출력
+			
+		// 회원 가입창
 		} else if (action.equals("/memberForm.do")) {
 			// memberForm.jsp로 포워딩
 			nextPage = "/task/MemberForm.jsp";
+			
+		// 회원 수정 요청 시 ID로 회원정보를 조회 후 수정창으로 포워딩
+		} else if (action.equals("/modMemberForm.do")) {
+			String uid = request.getParameter("uid");
+			MemberVO memInfo = memberDAO.findMember(uid);
+			request.setAttribute("memInfo", memInfo);
+			nextPage = "/task/modMemberForm.jsp";
+		} else if (action.equals("/modMember.do")) {
+			String uid = request.getParameter("uid");
+			String pwd = request.getParameter("pwd");
+			String uname = request.getParameter("uname");
+			Date birth = Date.valueOf(request.getParameter("birth"));
+			String email = request.getParameter("email");
+			String gender = request.getParameter("gender");
+			String[] hobbies = request.getParameterValues("hobby");
+			String hobby = String.join(", ", hobbies);
+			System.out.println("uid: " + uid);
+			System.out.println("pwd: " + pwd);
+			System.out.println("uname: " + uname);
+			System.out.println("birth: " + birth);
+			System.out.println("email: " + email);
+			System.out.println("gender: " + gender);
+			System.out.println("hobby: " + hobby);
+			MemberVO mem = new MemberVO(uid, pwd, uname, birth, email, gender, hobby);
+			memberDAO.modMember(mem);
+			request.setAttribute("msg", "modified");
+			nextPage = "/task/member/listMembers.do";
+			
+		// 회원 정보 삭제
+		} else if (action.equals("/delMember.do")) {
+			String uid = request.getParameter("uid");
+			memberDAO.delMember(uid);
+			request.setAttribute("msg", "deleted");
+			nextPage = "/task/member/listMembers.do";
+
 		// 그 외 다른 action 값은 회원 목록을 출력
 		} else {
 			List<MemberVO> membersList = memberDAO.listMembers();

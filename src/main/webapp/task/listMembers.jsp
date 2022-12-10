@@ -7,6 +7,29 @@
 <html lang="ko">
 
 <head>
+	<c:choose>
+		<c:when test='${msg=="addMember" }'>
+			<script>
+				window.onload = function () {
+					alert("회원 등록 성공");
+				}
+			</script>
+		</c:when>
+		<c:when test='${msg=="modified" }'>
+			<script>
+				window.onload = function () {
+					alert("회원 정보 수정 완료");
+				}
+			</script>
+		</c:when>
+		<c:when test='${msg=="delMember" }'>
+			<script>
+				window.onload = function () {
+					alert("회원 정보 삭제 완료");
+				}
+			</script>
+		</c:when>
+	</c:choose>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,6 +82,8 @@
 				<td width="7%">성별</td>
 				<td width="7%">취미</td>
 				<td width="7%">가입일</td>
+				<td width="7%"></td>
+				<td width="7%"></td>
 			</tr>
 
 			<c:choose>
@@ -80,6 +105,8 @@
 							<td>${mem.gender }</td>
 							<td>${mem.hobby }</td>
 							<td>${mem.joinDate}</td>
+							<td><a href="${contextPath}/jw/task/member/modMemberForm.do?uid=${mem.uid }">수정</a></td>
+							<td><a href="${contextPath}/jw/task/member/delMember.do?uid=${mem.uid }">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>

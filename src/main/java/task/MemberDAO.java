@@ -123,18 +123,19 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, _uid);
 			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			String uid = rs.getString("uid");
-			String pwd = rs.getString("pwd");
-			String uname = rs.getString("uname");
-			Date birth = rs.getDate("birth");
-			String email = rs.getString("email");
-			String gender = rs.getString("gender");
-			String hobby = rs.getString("hobby");
-			LocalDate joinDate = Date.valueOf(rs.getString("joinDate")).toLocalDate();
+			while(rs.next()) {
+				String uid = rs.getString("uid");
+				String pwd = rs.getString("pwd");
+				String uname = rs.getString("uname");
+				Date birth = rs.getDate("birth");
+				String email = rs.getString("email");
+				String gender = rs.getString("gender");
+				String hobby = rs.getString("hobby");
+				LocalDate joinDate = Date.valueOf(rs.getString("joinDate")).toLocalDate();
+				memInfo = new MemberVO(uid, pwd, uname, birth, email, gender, hobby, joinDate);
+			};
 			pstmt.close();
 			con.close();
-			memInfo = new MemberVO(uid, pwd, uname, birth, email, gender, hobby, joinDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -145,24 +146,27 @@ public class MemberDAO {
 	public void modMember(MemberVO memberVO) {
 		String uid = memberVO.getUid();
 		String pwd = memberVO.getPwd();
-		String uname = memberVO.getUname();
 		Date birth = memberVO.getBirth();
 		String email = memberVO.getEmail();
 		String hobby = memberVO.getHobby();
 		try {
 			con = dataFactory.getConnection();
-			String sql = "UPDATE member SET pwd=?,uname=?,birth=?,email=?,hobby=? "
+			String sql = "UPDATE member SET pwd=?,birth=?,email=?,hobby=? "
 						+ "WHERE uid=?";
 			System.out.println("-------------------------------------------------");
 			System.out.println("modMember: \n" + sql + "\nuid = " + uid);
 			System.out.println();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pwd);
-			pstmt.setString(2, uname);
-			pstmt.setDate(3, birth);
-			pstmt.setString(4, email);
-			pstmt.setString(5, hobby);
-			pstmt.executeQuery();
+			pstmt.setDate(2, birth);
+			pstmt.setString(3, email);
+			pstmt.setString(4, hobby);
+			pstmt.setString(5, uid);
+			System.out.println("pwd: " + pwd);
+			System.out.println("birth: " + birth);
+			System.out.println("email: " + email);
+			System.out.println("hobby: " + hobby);
+			pstmt.executeUpdate();
 			pstmt.close();
 			con.close();
 		} catch (Exception e) {
@@ -176,7 +180,7 @@ public class MemberDAO {
 			con = dataFactory.getConnection();
 			
 			// DELETE문을 문자열로 만들기
-			String sql = "DELETE FROM member " + "WHERE uid=?";
+			String sql = "DELETE FROM member WHERE uid=?";
 			System.out.println("-------------------------------------------------");
 			System.out.println("DeleteMember: \n" + sql + "\nuid = " + uid);
 			System.out.println();

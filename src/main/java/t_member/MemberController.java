@@ -91,13 +91,14 @@ public class MemberController extends HttpServlet {
 			String abtID;
 			if (overlappedID == true) {
 				abtID = "not_usable";
-				System.out.println("[MemberController] abtID: " + abtID);
+				System.out.println("[MemberController] abtID? " + abtID);
 			} else {
 				abtID = "usable";
-				System.out.println("[MemberController] abtID: " + abtID);
+				System.out.println("[MemberController] abtID? " + abtID);
 			}
 			out.write(abtID);
 			out.close();
+			return;
 			
 		// 회원 가입창
 		} else if (action.equals("/memberForm.do")) {

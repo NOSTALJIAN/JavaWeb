@@ -34,20 +34,20 @@
           <title>회원 가입</title>
           <script>
           	function check() {
-          		var _uid = $("#uid").val();		// MemberForm에서 입력한 ID
-          		if (_uid == "") {
+          		var abtID = $("#uid").val();		// MemberForm에서 입력한 ID
+          		if (abtID == "") {
           			alert("ID를 입력하세요.");
           			return;
           		}
           		$.ajax({
           			async: true,		// 동기식 처리(true), 비동기식 처리(false)
           			type: "post",		// 데이터 전송 방법('post' or 'get')
-          			url: "check.do?uid=" + _uid,	// 요청할 url
-          			data: { uid: _uid },	// { 서버로 전송할 데이터 }
+          			url: "check.do?uid=" + abtID,	// 요청할 url
+          			data: { uid: abtID },	// { 서버로 전송할 데이터 }
           			dataType: "text",		// 전송 받을 데이터 형식
-          			success: function(result) {
-          				console.log("사용 가능한가? " + result);
-          				if (result == "usable") {
+          			success: function(abtID) {
+          				console.log("사용 가능한가? " + abtID);
+          				if (abtID == "usable") {
 	          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
 	          				$('#overlappedMsg').css("color", "green");
 	          				$('#overlappedMsg').css("font-size", "11px");

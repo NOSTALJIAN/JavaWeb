@@ -79,8 +79,7 @@
                   <td style="text-align: center;">성별</td>
                   <td style="text-align: center; max-width: 250px;">취미</td>
                   <td style="text-align: center;">가입일</td>
-                  <td style="text-align: center; min-width: 40px;"></td>
-                  <td style="text-align: center; min-width: 40px;"></td>
+                  <td style="text-align: center;"></td>
                 </tr>
               </thead>
 
@@ -104,10 +103,9 @@
                         <td style="text-align: center;">${mem.gender }</td>
                         <td style="text-align: center; max-width: 250px;">${mem.hobby }</td>
                         <td style="text-align: center;">${mem.joinDate}</td>
-                        <td style="text-align: center; min-width: 40px;"><a
-                            href="${contextPath}/jw/t_member/member/modMemberForm.do?uid=${mem.uid }">수정</a></td>
-                        <td style="text-align: center; min-width: 40px;"><a
-                            href="${contextPath}/jw/t_member/member/delMember.do?uid=${mem.uid }">삭제</a>
+                        <td class="me-5">
+                          <a href="${contextPath}/jw/t_member/member/modMemberForm.do?uid=${mem.uid }">수정</a>
+                          <a href="${contextPath}/jw/t_member/member/delMember.do?uid=${mem.uid }">삭제</a>
                         </td>
                       </tr>
                     </c:forEach>
@@ -118,7 +116,8 @@
           </div>
 
           <div align="center">
-            <button class="mt-4 btn btn-danger b" onclick="location.href='${contextPath}/jw/t_member/member/memberForm.do'">
+            <button class="mt-4 btn btn-danger b"
+              onclick="location.href='${contextPath}/jw/t_member/member/memberForm.do'">
               회원 가입
             </button>
           </div>

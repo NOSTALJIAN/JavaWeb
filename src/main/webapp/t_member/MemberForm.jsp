@@ -50,17 +50,17 @@
           				if (result == "usable") {
 	          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
 	          				$('#overlappedMsg').css("color", "green");
-	          				$('#overlappedMsg').css("font-size", "12px");
+	          				$('#overlappedMsg').css("font-size", "11px");
 /* 	          				$('#btn_duplicate').prop("disabled", true); */
           				} else {
           					$('#overlappedMsg').text("사용할 수 없는 ID입니다.");
 	          				$('#overlappedMsg').css("color", "red");
-	          				$('#overlappedMsg').css("font-size", "12px");
+	          				$('#overlappedMsg').css("font-size", "11px");
           				}
           			},
           			error: function(request, status, error) {
           				$('#overlappedMsg').text(request.responseText);
-          				$('#overlappedMsg').css("font-size", "12px");
+          				$('#overlappedMsg').css("font-size", "11px");
           				$('#overlappedMsg').css("color", "red");
           				console.log("code: " + request.status);
           				console.log("message: " + request.responseText);
@@ -74,12 +74,12 @@
             	if (pwd != pwd2) {
 					$('#rOn').text("패스워드가 일치하지 않습니다.");
 	   				$('#rOn').css("color", "red");
-	   				$('#rOn').css("font-size", "12px");
+	   				$('#rOn').css("font-size", "11px");
           			console.log("패스워드가 일치하지 않습니다.");
             	} else if (pwd == pwd2) {
 					$('#rOn').text("패스워드가 일치합니다.");
 	   				$('#rOn').css("color", "green");
-	   				$('#rOn').css("font-size", "12px");
+	   				$('#rOn').css("font-size", "11px");
           			console.log("패스워드가 일치합니다.");
             	}
           	}
@@ -119,7 +119,7 @@
                 alert("성별 선택은 필수입니다.");
               } else {
                 formReg.method = "post";
-                formReg.action = "${contextPath}/task/member/addMember.do";
+                formReg.action = "${contextPath}/t_member/member/addMember.do";
                 formReg.submit();
               }
             }
@@ -134,9 +134,9 @@
               });
             })
           </script>
-          <link href="/jw/task/calc.css" rel="stylesheet">
-          <link href="/jw/task/table.css" rel="stylesheet">
-          <link href="/jw/task/font.css" rel="stylesheet">
+          <link href="/jw/t_member/calc.css" rel="stylesheet">
+          <link href="/jw/t_member/table.css" rel="stylesheet">
+          <link href="/jw/t_member/font.css" rel="stylesheet">
         </head>
 
         <body>
@@ -151,7 +151,7 @@
                   <td class="r">
                   	<input type="text" id="uid" name="uid" placeholder="가입할 사용자 ID" class="mt-1">
                   	<input type="button" id="btn_duplicate" value="중복체크" onClick="check()"><br>
-                  	<div id="overlappedMsg"></div>
+                  	<div id="overlappedMsg" class="mt-1"></div>
                   </td>
                 </tr>
                 <tr>
@@ -164,7 +164,7 @@
                   <td class="l"></td>
                   <td class="r">
                   	<input type="password" id="pwd2" name="pwd2" placeholder="비밀번호 확인" class="mt-1" onkeyup="rON()">
-                  	<div id="rOn"></div>
+                  	<div id="rOn" class="mt-1"></div>
                   </td>
                 </tr>
                 <tr>

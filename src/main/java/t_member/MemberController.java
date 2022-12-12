@@ -1,4 +1,4 @@
-package task;
+package t_member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/task/member/*")	// 브라우저에서 요청 시 두 단계로 요청이 이루어짐
+@WebServlet("/t_member/member/*")	// 브라우저에서 요청 시 두 단계로 요청이 이루어짐
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -61,7 +61,7 @@ public class MemberController extends HttpServlet {
 		// 조회한 회원 정보를 request에 바인딩
 		request.setAttribute("membersList", membersList);
 		// listMember.jsp로 포워딩
-		nextPage = "/task/listMembers.jsp";
+		nextPage = "/t_member/listMembers.jsp";
 		
 		// 회원 등록
 		} else if (action.equals("/addMember.do")) {
@@ -82,7 +82,7 @@ public class MemberController extends HttpServlet {
 			memberDAO.addMember(mem);
 			// 회원 등록 후 다시 회원 목록 출력
 			request.setAttribute("msg", "addMember");
-			nextPage = "/task/member/listMembers.do";
+			nextPage = "/t_member/member/listMembers.do";
 			
 		// ID 중복 여부 체크
 		} else if (action.equals("/check.do")) {
@@ -102,14 +102,14 @@ public class MemberController extends HttpServlet {
 		// 회원 가입창
 		} else if (action.equals("/memberForm.do")) {
 			// memberForm.jsp로 포워딩
-			nextPage = "/task/MemberForm.jsp";
+			nextPage = "/t_member/MemberForm.jsp";
 			
 		// 회원 수정 요청 시 ID로 회원정보를 조회 후 수정창으로 포워딩
 		} else if (action.equals("/modMemberForm.do")) {
 			String uid = request.getParameter("uid");
 			MemberVO memInfo = memberDAO.findMember(uid);
 			request.setAttribute("memInfo", memInfo);
-			nextPage = "/task/modMemberForm.jsp";
+			nextPage = "/t_member/modMemberForm.jsp";
 		} else if (action.equals("/modMember.do")) {
 			String uid = request.getParameter("uid");
 			String pwd = request.getParameter("pwd");
@@ -130,14 +130,14 @@ public class MemberController extends HttpServlet {
 			memberDAO.modMember(mem);
 			
 			request.setAttribute("msg", "modified");
-			nextPage = "/task/member/listMembers.do";
+			nextPage = "/t_member/member/listMembers.do";
 			
 		// 회원 정보 삭제
 		} else if (action.equals("/delMember.do")) {
 			String uid = request.getParameter("uid");
 			memberDAO.delMember(uid);
 			request.setAttribute("msg", "delMember");
-			nextPage = "/task/member/listMembers.do";
+			nextPage = "/t_member/member/listMembers.do";
 
 		// 그 외 다른 action 값은 회원 목록을 출력
 		} else {

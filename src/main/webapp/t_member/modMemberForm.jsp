@@ -64,7 +64,7 @@
 	      alert("취미를 하나 이상 선택하세요.");
 	    } else {
 	      formReg.method = "post"
-	      formReg.action = "${contextPath}/task/member/modMember.do?uid=${memInfo.uid}";
+	      formReg.action = "${contextPath}/t_member/member/modMember.do?uid=${memInfo.uid}";
 	      formReg.submit();
 	    }
 	  };
@@ -79,9 +79,9 @@
       });
     });
   </script>
-  <link href="/jw/task/calc.css" rel="stylesheet">
-  <link href="/jw/task/table.css" rel="stylesheet">
-  <link href="/jw/task/font.css" rel="stylesheet">
+  <link href="/jw/t_member/calc.css" rel="stylesheet">
+  <link href="/jw/t_member/table.css" rel="stylesheet">
+  <link href="/jw/t_member/font.css" rel="stylesheet">
 </head>
 
 <body>

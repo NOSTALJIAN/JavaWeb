@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import=" java.util.*,task.*" pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import=" java.util.*,t_member.*" pageEncoding="UTF-8"
   isELIgnored="false" %>
   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -53,8 +53,8 @@
             integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
           <title>회원 리스트</title>
-          <link href="/jw/task/table.css" rel="stylesheet">
-          <link href="/jw/task/font.css" rel="stylesheet">
+          <link href="/jw/t_member/table.css" rel="stylesheet">
+          <link href="/jw/t_member/font.css" rel="stylesheet">
           <style>
             a {
               text-decoration: none;
@@ -105,9 +105,9 @@
                         <td style="text-align: center; max-width: 250px;">${mem.hobby }</td>
                         <td style="text-align: center;">${mem.joinDate}</td>
                         <td style="text-align: center; min-width: 40px;"><a
-                            href="${contextPath}/jw/task/member/modMemberForm.do?uid=${mem.uid }">수정</a></td>
+                            href="${contextPath}/jw/t_member/member/modMemberForm.do?uid=${mem.uid }">수정</a></td>
                         <td style="text-align: center; min-width: 40px;"><a
-                            href="${contextPath}/jw/task/member/delMember.do?uid=${mem.uid }">삭제</a>
+                            href="${contextPath}/jw/t_member/member/delMember.do?uid=${mem.uid }">삭제</a>
                         </td>
                       </tr>
                     </c:forEach>
@@ -118,7 +118,7 @@
           </div>
 
           <div align="center">
-            <button class="mt-4 btn btn-danger b" onclick="location.href='${contextPath}/jw/task/member/memberForm.do'">
+            <button class="mt-4 btn btn-danger b" onclick="location.href='${contextPath}/jw/t_member/member/memberForm.do'">
               회원 가입
             </button>
           </div>

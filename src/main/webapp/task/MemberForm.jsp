@@ -33,42 +33,55 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
           <title>회원 가입</title>
           <script>
-          	function fn_overlapped() {
-          		var _uid = $("#uid").val();		// 입력한 ID값 가져오기
+          	function check() {
+          		var _uid = $("#uid").val();		// MemberForm에서 입력한 ID
           		if (_uid == "") {
           			alert("ID를 입력하세요.");
           			return;
           		}
           		$.ajax({
-          			type: "post",		// 데이터 전송 방법('post' or 'get')
           			async: true,		// 동기식 처리(true), 비동기식 처리(false)
-          			url: "/jw/task/member/check.do",	// 요청할 url
+          			type: "post",		// 데이터 전송 방법('post' or 'get')
+          			url: "check.do?uid=" + _uid,	// 요청할 url
           			data: { uid: _uid },	// { 서버로 전송할 데이터 }
           			dataType: "text",		// 전송 받을 데이터 형식
-          			success: function(abtID) {
-          				if (abtID == 'usable') {
+          			success: function(result) {
+          				console.log("사용 가능한가? " + result);
+          				if (result == "usable") {
 	          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
-	          				$('#btn_duplicate').prop("disabled", true);
-          				} else if (abtID == 'not_usable') {
+	          				$('#overlappedMsg').css("color", "green");
+	          				$('#overlappedMsg').css("font-size", "12px");
+/* 	          				$('#btn_duplicate').prop("disabled", true); */
+          				} else {
           					$('#overlappedMsg').text("사용할 수 없는 ID입니다.");
+	          				$('#overlappedMsg').css("color", "red");
+	          				$('#overlappedMsg').css("font-size", "12px");
           				}
           			},
-          			error: function(abtID, status, error) {
-          				$('#overlappedMsg').text("ERROR");
-          				console.log("code: " + abtID.status);
-          				console.log("message: " + abtID.responseText);
+          			error: function(request, status, error) {
+          				$('#overlappedMsg').text(request.responseText);
+          				$('#overlappedMsg').css("font-size", "12px");
+          				$('#overlappedMsg').css("color", "red");
+          				console.log("code: " + request.status);
+          				console.log("message: " + request.responseText);
           				console.log("error: " + error);
           			}
           		});
-          		function check(abtID, textStatus) {
-           			console.log(abtID);
-          			if (abtID == 'usable') {
-          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
-          				$('#btn_duplicate').prop("disabled", true);
-          			} else if (abtID == 'not_usable') {
-          				$('#overlappedMsg').text("사용할 수 없는 ID입니다.");
-          			}
-          		};
+          	}
+          	function rON () {
+          		var pwd = $("#pwd").val();
+          		var pwd2 = $("#pwd2").val();
+            	if (pwd != pwd2) {
+					$('#rOn').text("패스워드가 일치하지 않습니다.");
+	   				$('#rOn').css("color", "red");
+	   				$('#rOn').css("font-size", "12px");
+          			console.log("패스워드가 일치하지 않습니다.");
+            	} else if (pwd == pwd2) {
+					$('#rOn').text("패스워드가 일치합니다.");
+	   				$('#rOn').css("color", "green");
+	   				$('#rOn').css("font-size", "12px");
+          			console.log("패스워드가 일치합니다.");
+            	}
           	}
             var checkBoxes = document.querySelectorAll('input[type="checkbox"]');
             function vaildate() {
@@ -110,6 +123,7 @@
                 formReg.submit();
               }
             }
+            
             $(function () {
               $('#datepicker').datepicker({
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
@@ -135,18 +149,23 @@
                 <tr>
                   <td class="l" style="text-align: center;">ID</td>
                   <td class="r">
-                  	<input type="text" id="uid" name="uid" placeholder="가입할 사용자 ID" />
-                  	<input type="button" id="btn_duplicate" value="중복체크" onClick="fn_overlapped()" /><br>
+                  	<input type="text" id="uid" name="uid" placeholder="가입할 사용자 ID" class="mt-1">
+                  	<input type="button" id="btn_duplicate" value="중복체크" onClick="check()"><br>
                   	<div id="overlappedMsg"></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="l" style="text-align: center;">PW</td>
-                  <td class="r"><input type="password" name="pwd" placeholder="사용할 비밀번호"></td>
+                  <td class="r">
+                  	<input type="password" id="pwd" name="pwd" placeholder="사용할 비밀번호">
+                  </td>
                 </tr>
                 <tr>
                   <td class="l"></td>
-                  <td class="r"><input type="password" name="pwd2" placeholder="비밀번호 확인"></td>
+                  <td class="r">
+                  	<input type="password" id="pwd2" name="pwd2" placeholder="비밀번호 확인" class="mt-1" onkeyup="rON()">
+                  	<div id="rOn"></div>
+                  </td>
                 </tr>
                 <tr>
                   <td class="l" style="text-align: center;">이름</td>

@@ -15,7 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/task/member/*")	// 브라우저에서 요청 시 두 단계로 요청이 이루어짐
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	MemberDAO memberDAO;
+	
+	public MemberController() {
+		super();
+	}
 	
 	public void init() throws ServletException {
 		// MemberDAO 생성
@@ -86,13 +91,13 @@ public class MemberController extends HttpServlet {
 			String abtID;
 			if (overlappedID == true) {
 				abtID = "not_usable";
-				System.out.println("abtID: " + abtID);
+				System.out.println("[MemberController] abtID: " + abtID);
 			} else {
 				abtID = "usable";
-				System.out.println("abtID: " + abtID);
+				System.out.println("[MemberController] abtID: " + abtID);
 			}
 			out.write(abtID);
-			request.setAttribute("abtID", "abtID");
+			out.close();
 			
 		// 회원 가입창
 		} else if (action.equals("/memberForm.do")) {
@@ -139,9 +144,11 @@ public class MemberController extends HttpServlet {
 			List<MemberVO> membersList = memberDAO.listMembers();
 			request.setAttribute("membersList", membersList);
 			nextPage = "/listMembers.jsp";
+			
 		}
 		// nextPage에 지정한 요청명으로 다시 서블릿에 요청
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 		dispatch.forward(request, response);
 	}
+	
 }

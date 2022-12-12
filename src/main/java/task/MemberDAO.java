@@ -127,6 +127,7 @@ public class MemberDAO {
 			rs.next();
 			// String을 Boolean 자료형으로 변환
 			result = Boolean.parseBoolean(rs.getString("result"));
+			System.out.println("[MemberDAO] Overlapping? " + result);
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();

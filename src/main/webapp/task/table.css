@@ -67,5 +67,5 @@ blockquote {
 }
 .r {
   border-bottom: 1px solid #e3f1d5;
-  border-left: 1px solid #e3f1d5;
+  /* border-left: 1px solid #e3f1d5; */
 }

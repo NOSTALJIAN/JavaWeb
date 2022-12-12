@@ -111,6 +111,29 @@ public class MemberDAO {
 		
 	}
 	
+	// ID 중복 여부 확인
+	public boolean overlappedID(String uid) {
+		boolean result = false;
+		try {
+			con = dataFactory.getConnection();
+			String sql = "SELECT IF(COUNT(*) = 1, 'true', 'false') AS result FROM member WHERE uid=?;";
+			System.out.println("-------------------------------------------------");
+			System.out.println("overlappedID: \n" + sql + "\nuid = " + uid);
+			System.out.println();
+			pstmt = con.prepareStatement(sql);
+			// '?'에 ID 입력
+			pstmt.setString(1, uid);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			// String을 Boolean 자료형으로 변환
+			result = Boolean.parseBoolean(rs.getString("result"));
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	// 회원 정보 조회
 	public MemberVO findMember(String _uid) {
 		MemberVO memInfo = null;

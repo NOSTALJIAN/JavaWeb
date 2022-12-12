@@ -33,6 +33,43 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
           <title>회원 가입</title>
           <script>
+          	function fn_overlapped() {
+          		var _uid = $("#uid").val();		// 입력한 ID값 가져오기
+          		if (_uid == "") {
+          			alert("ID를 입력하세요.");
+          			return;
+          		}
+          		$.ajax({
+          			type: "post",		// 데이터 전송 방법('post' or 'get')
+          			async: true,		// 동기식 처리(true), 비동기식 처리(false)
+          			url: "/jw/task/member/check.do",	// 요청할 url
+          			data: { uid: _uid },	// { 서버로 전송할 데이터 }
+          			dataType: "text",		// 전송 받을 데이터 형식
+          			success: function(abtID) {
+          				if (abtID == 'usable') {
+	          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
+	          				$('#btn_duplicate').prop("disabled", true);
+          				} else if (abtID == 'not_usable') {
+          					$('#overlappedMsg').text("사용할 수 없는 ID입니다.");
+          				}
+          			},
+          			error: function(abtID, status, error) {
+          				$('#overlappedMsg').text("ERROR");
+          				console.log("code: " + abtID.status);
+          				console.log("message: " + abtID.responseText);
+          				console.log("error: " + error);
+          			}
+          		});
+          		function check(abtID, textStatus) {
+           			console.log(abtID);
+          			if (abtID == 'usable') {
+          				$('#overlappedMsg').text("사용할 수 있는 ID입니다.");
+          				$('#btn_duplicate').prop("disabled", true);
+          			} else if (abtID == 'not_usable') {
+          				$('#overlappedMsg').text("사용할 수 없는 ID입니다.");
+          			}
+          		};
+          	}
             var checkBoxes = document.querySelectorAll('input[type="checkbox"]');
             function vaildate() {
               let formReg = document.formReg;
@@ -97,7 +134,11 @@
               <table>
                 <tr>
                   <td class="l" style="text-align: center;">ID</td>
-                  <td class="r"><input type="text" name="uid" placeholder="가입할 사용자 ID"></td>
+                  <td class="r">
+                  	<input type="text" id="uid" name="uid" placeholder="가입할 사용자 ID" />
+                  	<input type="button" id="btn_duplicate" value="중복체크" onClick="fn_overlapped()" /><br>
+                  	<div id="overlappedMsg"></div>
+                  </td>
                 </tr>
                 <tr>
                   <td class="l" style="text-align: center;">PW</td>

@@ -116,10 +116,8 @@
           </div>
 
           <div align="center">
-            <button class="mt-4 btn btn-danger b"
-              onclick="location.href='${contextPath}/jw/t_member/member/memberForm.do'">
-              회원 가입
-            </button>
+            <button class="mt-4 btn btn-danger b" onclick="location.href='login.jsp'">로그인</button>
+            <button class="mt-4 btn btn-success b" onclick="location.href='${contextPath}/jw/t_member/member/memberForm.do'">회원 가입</button>
           </div>
 
         </body>

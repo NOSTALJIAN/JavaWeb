@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PopUp Test</title>
+  <script>
+    window.onload = pageLoad;
+    //  브라우저에 웹 페이지가 로드될 때 pageLoad() 함수를 호출하여 실행
+    function pageLoad() {
+      //  notShowPop의 쿠키 값을 getCookieValue()를 호출하여 얻음
+      notShowPop = getCookieValue();
+      //  notShowPop의 값이 true가 아니면 팝업창을 띄움
+      if (notShowPop != "true") {
+        window.open("popUp.html", "pop", "width=400, height=500, history=no, resizable=no, status=no, scrollbars=yes, menubar=no");
+      }
+    }
+    function getCookieValue() {
+      var result = "false";
+      if (document.cookie != "") {
+        //  document의 cookie 속성으로 쿠키 정보를 문자열로 가져온 후
+        //  세미콜론(;)으로 분리해 각각의 쿠키를 얻음
+        cookie = document.cookie.split(";");
+        for (var i = 0; i < cookie.length; i++) {
+          element = cookie[i].split("=");
+          value = element[0];
+          //  정규식을 이용해 쿠키 이름 문자열의 공백(₩s)을 제거
+          value = value.replace(/^\s*/, '');
+          //  쿠키 이름이 notShowPop이면 해당하는 쿠키 값을 가져와서 반환
+          if (value == "notShowPop") {
+            result = element[1];
+          }
+        }
+      }
+      return result;
+    }
+    //  '쿠키 삭제' 클릭 시 호출
+    //  notShowPop 쿠키 값을 false로 설정
+    function deleteCookie() {
+      document.cookie = "notShowPop=" + "false" + ";path=/; expires=-1";
+    }
+  </script>
+</head>
+
+<body>
+  <div>
+    <form action="">
+      <!-- 쿠키 삭제 -->
+      <input type="button" value="쿠키 삭제" onclick="deleteCookie()">
+    </form>
+  </div>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/t_member/member/*")	// 브라우저에서 요청 시 두 단계로 요청이 이루어짐
 public class MemberController extends HttpServlet {
@@ -49,12 +50,14 @@ public class MemberController extends HttpServlet {
 		System.out.println("doHandle() Method 호출");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
+		
 		// URL에서 요청명을 가져오기
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
 		
-		// 최초 요청이거나 action 값이 /memberList.do면 회원 목록을 출력
+		// 최초 요청이거나 action 값이 /listMembers.do면 회원 목록을 출력
 		if (action == null || action.equals("/listMembers.do")) {
 		// 요청에 대한 회원 정보 조회
 		List<MemberVO> membersList = memberDAO.listMembers();
@@ -62,6 +65,28 @@ public class MemberController extends HttpServlet {
 		request.setAttribute("membersList", membersList);
 		// listMember.jsp로 포워딩
 		nextPage = "/t_member/listMembers.jsp";
+		
+		// 로그인
+		} else if (action.equals("/login.do")) {
+			String uid = request.getParameter("uid");
+			String pwd = request.getParameter("pwd");
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUid(uid);
+			memberVO.setPwd(pwd);
+			MemberDAO dao = new MemberDAO();
+			boolean result = dao.loginMember(memberVO);
+			if (result == true) {
+				// 조회한 결과가 true이면 isLogOn 속성을 true로 세션에 저장
+				session.setAttribute("isLogon", true);
+				// 조회한 결과가 true이면 ID와 비밀번호를 세션에 저장
+				session.setAttribute("login.uid", uid);
+				session.setAttribute("login.pwd", pwd);
+				nextPage = "/t_member/main.jsp";
+			} else {
+				request.setAttribute("msg", "wrongInfo");
+				nextPage = "/t_member/login.jsp";
+//				nextPage = "/jw/t_member/login.jsp";
+			}
 		
 		// 회원 등록
 		} else if (action.equals("/addMember.do")) {

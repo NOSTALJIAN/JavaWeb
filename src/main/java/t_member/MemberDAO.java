@@ -218,4 +218,34 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// 로그인
+	public boolean loginMember(MemberVO memberVO) {
+		boolean result = false;
+		String uid = memberVO.getUid();
+		String pwd = memberVO.getPwd();
+		try {
+			con = dataFactory.getConnection();
+			String sql = "SELECT PWD FROM member WHERE UID=?";
+			System.out.println("loginMember: \n" + sql + "\nuid = " + uid);
+			System.out.println();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				if (rs.getString("pwd").equals(pwd)) {
+					System.out.println("login Success!\tID와 패스워드가 일치함");
+					return true;
+				} else {
+					System.out.println("login Success? " + result + "\tcuz Wrong Password");
+				}
+			} else {
+				System.out.println("login Success? " + result + "\tcuz Wrong ID");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

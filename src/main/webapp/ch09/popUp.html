@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pop Up</title>
+  <script>
+    function setPopUpStart(obj) {
+      if (obj.checked == true) {
+        var expireDate = new Date();
+        //  쿠키 유효 시간을 하루로 설정
+        var days = 1;
+        expireDate.setDate(expireDate.getDate() + days);
+        //  오늘 더 이상 팝업을 띄우지 않기에 체크하면 notShowPop 쿠키 값을 true로 설정하여
+        //  재접속시 팝업창을 띄우지 않음
+        document.cookie = "notShowPop=" + "true" + ";path=/; expires=" + expireDate.toGMTString();
+        window.close();
+      }
+    }
+  </script>
+</head>
+
+<body>
+  알림 팝업창입니다.
+  <br><br><br><br><br><br><br>
+  <form>
+    <input type="checkbox" onclick="setPopUpStart(this)">오늘 더 이상 팝업창 띄우지 않기
+  </form>
+</body>
+
+</html>

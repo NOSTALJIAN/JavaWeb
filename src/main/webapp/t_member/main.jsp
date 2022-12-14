@@ -17,6 +17,15 @@
 <html lang="ko">
 
 <head>
+  <c:choose>
+    <c:when test='${msg=="successLogin" }'>
+      <script>
+        window.onload = function () {
+          alert("로그인 성공");
+        }
+      </script>
+    </c:when>
+  </c:choose>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

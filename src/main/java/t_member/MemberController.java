@@ -81,6 +81,7 @@ public class MemberController extends HttpServlet {
 				// 조회한 결과가 true이면 ID와 비밀번호를 세션에 저장
 				session.setAttribute("login.uid", uid);
 				session.setAttribute("login.pwd", pwd);
+				request.setAttribute("msg", "successLogin");
 				nextPage = "/t_member/main.jsp";
 			} else {
 				request.setAttribute("msg", "wrongInfo");
